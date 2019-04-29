@@ -10,7 +10,7 @@ public class List_inChainOfNodes{
       Construct an empty list
      */
     public List_inChainOfNodes() {
-        headSentinel = new Node(null, null, null);
+        headSentinel = new Node( null, null);
     }
 
     /**
@@ -52,7 +52,7 @@ public class List_inChainOfNodes{
      */
      public boolean addAsHead( Object val) {
         headSentinel.setNextNode(
-            new Node( headSentinel, val, headSentinel.getNextNode()));
+          new Node( val, headSentinel.getNextNode()));
         return true;
      }
 
@@ -115,17 +115,11 @@ public class List_inChainOfNodes{
       (that is, increase the index associated with each).
      */
     public boolean add( int index, Object value) {
-        Node nodeBefore = getNodeBefore(index);
-        if (index != size() - 1) {
-            Node newNode = new Node(nodeBefore,value,nodeBefore.getNextNode());
-            getNode(index).setPrevNode(newNode);
-            getNodeBefore(index).setNextNode(newNode);
-        }
-        else {    
-            Node newNode = new Node(value);
-            nodeBefore.setNextNode(newNode);
-            newNode.setPrevNode(nodeBefore);
-        }
+        Node newNode = new Node( value);
+        Node afterNew = /* the node that should follow newNode
+          in the augmented list */
+          getNodeBefore( index).setNextNode( newNode);
+        newNode.setNextNode( afterNew);
         return true;
     }
 
